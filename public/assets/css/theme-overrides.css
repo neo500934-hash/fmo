@@ -1,0 +1,55 @@
+/*
+ * Pins the topbar and sidebar to the dark palette at all times.
+ * Light/dark mode toggling (via [data-theme]) only affects the main content area.
+ * Values mirror the [data-theme=dark] block in main.css.
+ */
+.header,
+.sidebar,
+.mobile-search,
+.mobile-header-menu {
+  --background-color: #11161d;
+  --default-color: #c6d0dc;
+  --heading-color: #e4ebf2;
+  --accent-color: #0971d2;
+  --surface-color: #1a222d;
+  --contrast-color: #ffffff;
+  --muted-color: #8f9dad;
+  --light-color: #6f7f91;
+  --border-color: #2f3c4b;
+  --border-color-light: #202a36;
+  --border-color-dark: #455567;
+  --success-color: #4ade80;
+  --success-color-light: rgba(74, 222, 128, 0.15);
+  --warning-color: #fbbf24;
+  --warning-color-light: rgba(251, 191, 36, 0.15);
+  --danger-color: #f87171;
+  --danger-color-light: rgba(248, 113, 113, 0.15);
+  --info-color: #60a5fa;
+  --info-color-light: rgba(96, 165, 250, 0.15);
+  --nav-color: var(--default-color);
+  --nav-hover-color: var(--accent-color);
+  --nav-mobile-background-color: var(--surface-color);
+  --nav-dropdown-background-color: var(--surface-color);
+  --nav-dropdown-color: var(--default-color);
+  --nav-dropdown-hover-color: var(--accent-color);
+  --header-bg: rgba(26, 34, 45, 0.92);
+  --header-shadow: 0 1px 0 rgb(143 157 173 / 0.2);
+  --header-border: var(--border-color);
+  --sidebar-bg: #1b2430;
+  --sidebar-border: var(--border-color);
+  --sidebar-color: #c6d0dc;
+  --sidebar-muted-color: #8f9dad;
+  --sidebar-hover-bg: rgba(96, 165, 250, 0.14);
+  --sidebar-active-bg: rgba(96, 165, 250, 0.22);
+  --sidebar-active-color: #dbeafe;
+  --card-bg: #1a222d;
+  --card-shadow: 0 8px 20px -14px rgb(0 0 0 / 0.65), 0 3px 8px -5px rgb(2 6 23 / 0.55);
+  --card-border: var(--border-color);
+  --table-header-bg: #1a2430;
+  --table-hover-bg: #253241;
+  --table-stripe-bg: #1d2835;
+  --input-bg: #17202a;
+  --input-border: var(--border-color);
+  --input-focus-border: var(--accent-color);
+  --input-focus-ring: rgb(96 165 250 / 0.24);
+}
