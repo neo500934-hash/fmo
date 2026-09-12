@@ -11,7 +11,7 @@
                 <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                     <span class="nav-icon"><i class="ph ph-squares-four"></i></span>
                     <span class="nav-text">Dashboard</span>
-                    <span class="nav-badge nav-badge-soft">Main</span>
+
                 </a>
             </li>
             @unless (auth()->user()->isDriver())
@@ -20,7 +20,7 @@
                         href="{{ route('users.index') }}">
                         <span class="nav-icon"><i class="ph ph-users-three"></i></span>
                         <span class="nav-text">Users</span>
-                        <span class="nav-badge nav-badge-soft">Main</span>
+
                     </a>
                 </li>
                 <li class="nav-item">
@@ -28,7 +28,7 @@
                         href="{{ route('drivers.tracking') }}">
                         <span class="nav-icon"><i class="ph ph-map-pin"></i></span>
                         <span class="nav-text">Live Tracking</span>
-                        <span class="nav-badge nav-badge-soft">Main</span>
+
                     </a>
                 </li>
             @endunless

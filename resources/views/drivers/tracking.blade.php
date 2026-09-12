@@ -6,6 +6,24 @@
 
 @push('styles')
     <link href="{{ asset('assets/vendors/leaflet/leaflet.css') }}" rel="stylesheet">
+    <style>
+        .driver-marker-label {
+            padding: 3px 7px;
+            text-align: center;
+        }
+
+        .driver-marker-name {
+            font-weight: 600;
+            font-size: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .driver-marker-time {
+            font-size: 0.65rem;
+            color: var(--muted-color, #6c757d);
+            line-height: 1.2;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -102,8 +120,18 @@
                         markers.get(driver.id).setLatLng(latLng);
                     } else {
                         const marker = L.marker(latLng).addTo(map);
+                        marker.bindTooltip('', {
+                            permanent: true,
+                            direction: 'top',
+                            offset: [0, -36],
+                            className: 'driver-marker-label',
+                        });
                         markers.set(driver.id, marker);
                     }
+
+                    markers.get(driver.id).setTooltipContent(
+                        `<div class="driver-marker-name">${driver.name}</div><div class="driver-marker-time">${driver.updated_at ?? 'just now'}</div>`
+                    );
 
                     markers.get(driver.id).bindPopup(
                         `<strong>${driver.name}</strong><br>${driver.car ?? ''} ${driver.color ?? ''}<br>Updated ${driver.updated_at ?? 'just now'}`

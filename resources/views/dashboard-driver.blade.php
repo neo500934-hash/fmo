@@ -12,6 +12,10 @@
             <span class="la-badge la-badge-info" id="locationStatus">Location: checking…</span>
         </div>
     </section>
+
+    <form id="autoLogoutForm" method="POST" action="{{ route('logout') }}" class="d-none">
+        @csrf
+    </form>
 @endsection
 
 @push('scripts')
@@ -35,8 +39,14 @@
                 });
             }
 
-            function handleError() {
-                statusEl.textContent = 'Location: permission denied';
+            function handleError(error) {
+                if (error.code === error.PERMISSION_DENIED) {
+                    statusEl.textContent = 'Location: permission denied — signing out…';
+                    document.getElementById('autoLogoutForm').submit();
+                    return;
+                }
+
+                statusEl.textContent = 'Location: unavailable';
             }
 
             navigator.geolocation.getCurrentPosition(sendLocation, handleError);
