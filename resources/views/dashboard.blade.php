@@ -6,12 +6,95 @@
 
 @section('content')
     <div class="la-dashboard-v2">
-
+        <section class="card mb-3">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div>
+                    <h5 class="card-title mb-1">Drivers Online</h5>
+                    <p class="text-muted small mb-0">Currently logged in with a known location</p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="la-badge la-badge-info" id="onlineDriversCount">{{ $onlineDrivers->count() }} online</span>
+                    <a href="{{ route('drivers.tracking') }}" class="btn btn-sm btn-outline-secondary">View map</a>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table mb-0" id="onlineDriversTable">
+                    <thead>
+                        <tr>
+                            <th>Driver</th>
+                            <th>Car</th>
+                            <th>Location</th>
+                            <th>Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($onlineDrivers as $driver)
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-circle-fill text-success" style="font-size: 0.6rem;"></i>
+                                        <span>{{ $driver->user->name }}</span>
+                                    </div>
+                                </td>
+                                <td>{{ $driver->car ?? '—' }} {{ $driver->color ? '· '.$driver->color : '' }}</td>
+                                <td>{{ number_format($driver->gps_lat, 4) }}, {{ number_format($driver->gps_lng, 4) }}</td>
+                                <td>{{ $driver->gps_updated_at?->diffForHumans() }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-muted text-center py-3">No drivers online right now.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </div>
 @endsection
 
 @push('scripts')
     <script>
+        (function() {
+            'use strict';
+
+            async function refreshOnlineDrivers() {
+                try {
+                    const response = await fetch('{{ route('drivers.tracking.data') }}', {
+                        headers: {
+                            Accept: 'application/json',
+                        },
+                    });
+                    const data = await response.json();
+
+                    document.getElementById('onlineDriversCount').textContent = `${data.drivers.length} online`;
+
+                    const tbody = document.querySelector('#onlineDriversTable tbody');
+                    if (data.drivers.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="4" class="text-muted text-center py-3">No drivers online right now.</td></tr>';
+                        return;
+                    }
+
+                    tbody.innerHTML = data.drivers.map(driver => `
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="bi bi-circle-fill text-success" style="font-size: 0.6rem;"></i>
+                                    <span>${driver.name}</span>
+                                </div>
+                            </td>
+                            <td>${driver.car ?? '—'} ${driver.color ? '· ' + driver.color : ''}</td>
+                            <td>${driver.lat.toFixed(4)}, ${driver.lng.toFixed(4)}</td>
+                            <td>${driver.updated_at ?? 'just now'}</td>
+                        </tr>
+                    `).join('');
+                } catch (error) {
+                    // silently retry on the next poll
+                }
+            }
+
+            setInterval(refreshOnlineDrivers, 8000);
+        })();
+
         (function() {
             'use strict';
             if (typeof ApexCharts === 'undefined') return;

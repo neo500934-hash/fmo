@@ -38,6 +38,9 @@
     <!-- Keep topbar/sidebar dark regardless of the light/dark toggle -->
     <link href="{{ asset('assets/css/theme-overrides.css') }}" rel="stylesheet">
 
+    <!-- App-specific additions (avatars, badges, icon buttons) -->
+    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
+
     @stack('styles')
 
     <!-- =======================================================
@@ -90,6 +93,8 @@
 
     <!-- App Sidebar Toggle (for app pages with sidebars) -->
     <script src="{{ asset('assets/js/apps-sidebar-toggle.js') }}"></script>
+
+    @vite(['resources/js/app.js'])
 
     @stack('scripts')
 </body>

@@ -16,7 +16,7 @@
                 <div class="fauth-card">
 
 
-                    <form class="fauth-form" method="POST" action="{{ route('login') }}" novalidate>
+                    <form class="fauth-form" method="POST" action="{{ route('login') }}" data-login-form novalidate>
                         @csrf
 
                         <div class="fauth-field">
@@ -34,16 +34,11 @@
                                 <label for="password" class="form-label">Password</label>
                                 <a href="#" class="fauth-link">Forgot password?</a>
                             </div>
-                            <div class="input-group">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    id="password" name="password" placeholder="Enter your password" required>
-                                <button class="btn btn-outline-secondary" type="button" data-toggle-password>
-                                    <i class="bi bi-eye"></i>
-                                </button>
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                @enderror
-                            </div>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                id="password" name="password" placeholder="Enter your password" required>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="fauth-row-between mb-2">
@@ -51,7 +46,6 @@
                                 <input class="form-check-input" type="checkbox" id="remember" name="remember">
                                 <label class="form-check-label" for="remember">Remember me</label>
                             </div>
-                            <a href="#" class="fauth-link">Use lock screen</a>
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100">Sign In</button>

@@ -1,0 +1,68 @@
+/* App-specific additions on top of the LiteAdmin template */
+
+.la-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.la-rank-badge,
+.la-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm, 6px);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
+}
+
+.la-badge-success {
+  color: var(--success-color);
+  background: color-mix(in srgb, var(--success-color), transparent 88%);
+  border-color: color-mix(in srgb, var(--success-color), transparent 70%);
+}
+
+.la-badge-warning {
+  color: var(--warning-color);
+  background: color-mix(in srgb, var(--warning-color), transparent 88%);
+  border-color: color-mix(in srgb, var(--warning-color), transparent 70%);
+}
+
+.la-badge-danger {
+  color: var(--danger-color);
+  background: color-mix(in srgb, var(--danger-color), transparent 88%);
+  border-color: color-mix(in srgb, var(--danger-color), transparent 70%);
+}
+
+.la-badge-info {
+  color: var(--info-color);
+  background: color-mix(in srgb, var(--info-color), transparent 88%);
+  border-color: color-mix(in srgb, var(--info-color), transparent 70%);
+}
+
+.la-badge-secondary,
+.la-badge-muted {
+  color: var(--muted-color);
+  background: color-mix(in srgb, var(--muted-color), transparent 88%);
+  border-color: color-mix(in srgb, var(--muted-color), transparent 70%);
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+}

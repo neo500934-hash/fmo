@@ -14,8 +14,24 @@
                     <span class="nav-badge nav-badge-soft">Main</span>
                 </a>
             </li>
-
-
+            @unless (auth()->user()->isDriver())
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}"
+                        href="{{ route('users.index') }}">
+                        <span class="nav-icon"><i class="ph ph-users-three"></i></span>
+                        <span class="nav-text">Users</span>
+                        <span class="nav-badge nav-badge-soft">Main</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('drivers.tracking') ? 'active' : '' }}"
+                        href="{{ route('drivers.tracking') }}">
+                        <span class="nav-icon"><i class="ph ph-map-pin"></i></span>
+                        <span class="nav-text">Live Tracking</span>
+                        <span class="nav-badge nav-badge-soft">Main</span>
+                    </a>
+                </li>
+            @endunless
         </ul>
     </nav>
 
@@ -24,17 +40,18 @@
             <a href="#" class="sidebar-footer-profile">
                 <img src="{{ asset('assets/img/profile-img.webp') }}" alt="User" class="sidebar-footer-avatar">
                 <div class="sidebar-footer-info">
-                    <div class="sidebar-footer-name">John Doe</div>
-                    <div class="sidebar-footer-role">Product Admin</div>
+                    <div class="sidebar-footer-name">{{ auth()->user()->name }}</div>
+                    <div class="sidebar-footer-role">{{ auth()->user()->roleLabel() }}</div>
                 </div>
             </a>
             <div class="sidebar-footer-actions">
                 <a href="#" class="sidebar-footer-action" title="Settings">
                     <i class="bi bi-gear"></i>
                 </a>
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('logout') }}" data-logout-form>
                     @csrf
-                    <button type="submit" class="sidebar-footer-action sidebar-footer-logout border-0 bg-transparent p-0" title="Logout">
+                    <button type="submit"
+                        class="sidebar-footer-action sidebar-footer-logout border-0 bg-transparent p-0" title="Logout">
                         <i class="bi bi-box-arrow-right"></i>
                     </button>
                 </form>

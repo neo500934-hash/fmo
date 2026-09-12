@@ -112,8 +112,8 @@
                 <button class="dropdown-toggle user-trigger" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="{{ asset('assets/img/profile-img.webp') }}" alt="User" class="user-avatar">
                     <div class="user-brief">
-                        <span class="user-name">John Doe</span>
-                        <span class="user-role">Product Admin</span>
+                        <span class="user-name">{{ auth()->user()->name }}</span>
+                        <span class="user-role">{{ auth()->user()->roleLabel() }}</span>
                     </div>
                     <i class="bi bi-chevron-down user-chevron"></i>
                 </button>
@@ -122,8 +122,8 @@
                     <div class="user-menu-head">
                         <img src="{{ asset('assets/img/profile-img.webp') }}" alt="User" class="user-menu-avatar">
                         <div>
-                            <div class="user-menu-name">John Doe</div>
-                            <div class="user-menu-email">john.doe@example.com</div>
+                            <div class="user-menu-name">{{ auth()->user()->name }}</div>
+                            <div class="user-menu-email">{{ auth()->user()->email }}</div>
                         </div>
                     </div>
                     <div class="user-menu-body">
@@ -137,7 +137,7 @@
                                 class="bi bi-credit-card"></i><span>Billing</span></a>
                     </div>
                     <div class="user-menu-foot">
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('logout') }}" data-logout-form>
                             @csrf
                             <button type="submit" class="user-menu-logout border-0 bg-transparent w-100"><i class="bi bi-box-arrow-right"></i><span>Sign
                                     Out</span></button>
