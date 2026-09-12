@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\DriverLocationController;
 use App\Http\Controllers\DriverTrackingController;
+use App\Http\Controllers\SmsWebhookController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/gps-test-send', function () {
     return view('gps-test-send');
 });
+
+Route::post('/sms/webhook', [SmsWebhookController::class, 'receive'])
+    ->name('sms.webhook')
+    ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
